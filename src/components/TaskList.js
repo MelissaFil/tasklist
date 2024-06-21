@@ -35,11 +35,11 @@ const TaskList = () => {
       </Button>
       <Grid container spacing={2} marginTop={2}>
         {tasks.map(task => (
-          <Grid item xs={12} sm={6} md={4} key={task.id}>
+          <Grid item xs={12} sm={6} key={task.id}>
             <Task task={task} onToggleComplete={handleToggleComplete} />
           </Grid>
         ))}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} >
           <Card onClick={() => setIsModalOpen(true)} className='task-card-add'>
             <CardContent>
               <AddIcon fontSize="large" />

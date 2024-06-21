@@ -20,8 +20,8 @@ const AddTaskModal = ({ open, onClose, onAddTask }) => {
         <Typography variant="h6" component="h2" mb={2}>
           Adicionar tarefa
         </Typography>
-        <TextField fullWidth label="Título" variant="outlined" value={title} onChange={(e) => setTitle(e.target.value)} margin="normal" />
-        <TextField fullWidth label="Descrição" variant="outlined" value={description} onChange={(e) => setDescription(e.target.value)} margin="normal" />
+        <TextField fullWidth label="Título" variant="outlined" value={title} onChange={(e) => setTitle(e.target.value)} margin="normal"/>
+        <TextField fullWidth label="Descrição" variant="outlined" value={description} onChange={(e) => setDescription(e.target.value)} margin="normal"  inputProps={{ maxLength: 80 }}/>
         <Box mt={2} display="flex" justifyContent="flex-end">
           <Button variant="contained" color="secondary" onClick={onClose} style={{ marginRight: 8 }}>
             Fechar
