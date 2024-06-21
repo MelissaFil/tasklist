@@ -1,11 +1,22 @@
-import React from 'react';
-import { Card, CardContent, Typography, IconButton, Checkbox, useTheme } from '@mui/material';
+import React, {useState} from 'react';
+import { Card, CardContent, Typography, IconButton, Checkbox, useTheme, Popover, List, ListItem, ListItemButton } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
 import './Task.css';
 
 const Task = ({ task, onToggleComplete }) => {
   const theme = useTheme();
 
+  const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
+
+  const handlePopoverOpen = (event) => {
+    setPopoverAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setPopoverAnchorEl(null);
+  };
+
+  const openPopover = Boolean(popoverAnchorEl);
   return (
     <Card className="task-card">
       <CardContent className="task-content">
@@ -23,9 +34,35 @@ const Task = ({ task, onToggleComplete }) => {
           )}
         </Typography>
       </CardContent>
-      <IconButton>
+      <IconButton onClick={handlePopoverOpen}>
         <MoreVert />
       </IconButton>
+      <Popover
+        open={openPopover}
+        anchorEl={popoverAnchorEl}
+        onClose={handlePopoverClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton >
+              Editar
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton >
+              Excluir
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Popover>
     </Card>
   );
 };
