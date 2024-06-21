@@ -1,17 +1,21 @@
 import React from 'react';
-import { Card, CardContent, Typography, IconButton, Checkbox,useTheme } from '@mui/material';
+import { Card, CardContent, Typography, IconButton, Checkbox, useTheme } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
+import './Task.css';
 
 const Task = ({ task, onToggleComplete }) => {
-    const theme = useTheme();
+  const theme = useTheme();
+
   return (
-    <Card sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', padding: '10px' }}>
-      <CardContent>
+    <Card className="task-card">
+      <CardContent className="task-content">
         <Typography variant="h6">{task.title}</Typography>
         <Typography variant="body2">{task.description}</Typography>
         <Typography variant="caption">
           {task.completed ? (
-            <span style={{ color: theme.palette.success.main }}>Concluída <Checkbox  checked={true}  /></span>
+            <span style={{ color: theme.palette.success.main }}>
+              Concluída <Checkbox checked={true} disabled />
+            </span>
           ) : (
             <span style={{ color: theme.palette.info.main }}>
               Concluir <Checkbox checked={task.completed} onChange={() => onToggleComplete(task.id)} />

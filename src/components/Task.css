@@ -1,0 +1,18 @@
+.task-card, .task-card-add {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .task-content, .task-card-add {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .task-card-add{
+    align-items: center;
+  }

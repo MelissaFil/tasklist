@@ -40,7 +40,7 @@ const TaskList = () => {
           </Grid>
         ))}
         <Grid item xs={12} sm={6} md={4}>
-          <Card onClick={() => setIsModalOpen(true)} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', cursor: 'pointer' }}>
+          <Card onClick={() => setIsModalOpen(true)} className='task-card-add'>
             <CardContent>
               <AddIcon fontSize="large" />
             </CardContent>
