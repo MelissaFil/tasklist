@@ -28,6 +28,12 @@ const TaskList = () => {
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
+  const deleteTask = (taskId) => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
   return (
     <div>
       <Button variant="contained" color="primary" onClick={() => setIsModalOpen(true)}>
@@ -36,10 +42,10 @@ const TaskList = () => {
       <Grid container spacing={2} marginTop={2}>
         {tasks.map(task => (
           <Grid item xs={12} sm={6} key={task.id}>
-            <Task task={task} onToggleComplete={handleToggleComplete} />
+            <Task task={task} onToggleComplete={handleToggleComplete} onDeleteTask={deleteTask} />
           </Grid>
         ))}
-        <Grid item xs={12} sm={6} >
+        <Grid item xs={12} sm={6}>
           <Card onClick={() => setIsModalOpen(true)} className='task-card-add'>
             <CardContent>
               <AddIcon fontSize="large" />

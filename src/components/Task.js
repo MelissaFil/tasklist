@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, Typography, IconButton, Checkbox, useTheme, Popover, List, ListItem, ListItemButton } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
 import './Task.css';
 
-const Task = ({ task, onToggleComplete }) => {
+const Task = ({ task, onToggleComplete, onDeleteTask }) => {
   const theme = useTheme();
-
   const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -16,7 +15,13 @@ const Task = ({ task, onToggleComplete }) => {
     setPopoverAnchorEl(null);
   };
 
+  const handleDeleteTask = () => {
+    onDeleteTask(task.id); 
+   
+  };
+
   const openPopover = Boolean(popoverAnchorEl);
+
   return (
     <Card className="task-card">
       <CardContent className="task-content">
@@ -57,7 +62,7 @@ const Task = ({ task, onToggleComplete }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton >
+            <ListItemButton onClick={handleDeleteTask}>
               Excluir
             </ListItemButton>
           </ListItem>
