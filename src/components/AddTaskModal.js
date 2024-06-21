@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Box, Typography, TextField, Button } from '@mui/material';
 
 const AddTaskModal = ({ open, onClose, onAddTask }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  
+  useEffect(() => {
+    if (!open) {
+      setTitle('');
+      setDescription('');
+    }
+  }, [open]);
 
   const handleAddTask = () => {
     if (title && description) {
