@@ -1,7 +1,8 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Switch } from '@mui/material';
-import { Brightness4, Brightness7, Menu } from '@mui/icons-material';
+import { Brightness4, Brightness7} from '@mui/icons-material';
 import { Container } from 'react-bootstrap';
+import { darkTheme } from '../themes';
 
 const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
   const handleThemeChange = () => {
@@ -9,7 +10,7 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }) => {
   };
 
   return (
-    <AppBar position="static" style={{ backgroundColor: '#3A9679' }}>
+    <AppBar position="static" style={{ backgroundColor: darkTheme.palette.primary.main }}>
       <Container>
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
