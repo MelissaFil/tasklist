@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
 import { useAuth } from '../Auth';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const { login } = useAuth();
@@ -12,7 +13,7 @@ const Login = () => {
     if (login(credentials.username, credentials.password)) {
       navigate('/');
     } else {
-      alert('Credenciais inválidas');
+      toast.error('Credenciais erradas');
     }
   };
 
