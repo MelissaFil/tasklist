@@ -23,6 +23,7 @@ const Login = () => {
       </Typography>
       <TextField
         label="Usuário"
+        name='username'
         fullWidth
         margin="normal"
         value={credentials.username}
@@ -30,13 +31,14 @@ const Login = () => {
       />
       <TextField
         label="Senha"
+        name='password'
         type="password"
         fullWidth
         margin="normal"
         value={credentials.password}
         onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
       />
-      <Button variant="contained" color="primary" onClick={handleLogin}>
+      <Button type='submit' variant="contained" color="primary" onClick={handleLogin}>
         Entrar
       </Button>
     </Container>
