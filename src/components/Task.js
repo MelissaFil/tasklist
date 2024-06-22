@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, IconButton, Checkbox, useTheme, Popover,
 import { MoreVert } from '@mui/icons-material';
 import './Task.css';
 
-const Task = ({ task, onToggleComplete, onDeleteTask }) => {
+const Task = ({ task, onToggleComplete, onDeleteTask, onEditTask }) => {
   const theme = useTheme();
   const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
 
@@ -16,8 +16,12 @@ const Task = ({ task, onToggleComplete, onDeleteTask }) => {
   };
 
   const handleDeleteTask = () => {
-    onDeleteTask(task.id); 
-   
+    onDeleteTask(task.id);
+  };
+
+  const handleEditTask = () => {
+    onEditTask(task);
+  
   };
 
   const openPopover = Boolean(popoverAnchorEl);
@@ -57,7 +61,7 @@ const Task = ({ task, onToggleComplete, onDeleteTask }) => {
       >
         <List>
           <ListItem disablePadding>
-            <ListItemButton >
+            <ListItemButton onClick={handleEditTask}>
               Editar
             </ListItemButton>
           </ListItem>
