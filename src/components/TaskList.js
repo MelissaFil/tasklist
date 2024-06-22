@@ -3,11 +3,16 @@ import { Button, Grid, Card, CardContent} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Task from './Task';
 import AddTaskModal from './AddTaskModal';
+import ConfirmationModal from './ConfirmationModal'; // Importar o modal de confirmação
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
   useEffect(() => {
     // Carregar tarefas do local storage
@@ -40,16 +45,17 @@ const TaskList = () => {
     toast.success('Tarefa editada com sucesso!');
   };
 
-  const deleteTask = (taskId) => {
-    const updatedTasks = tasks.filter(task => task.id !== taskId);
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    toast.error('Tarefa excluída!');
-  };
-
   const handleOpenModalForEdit = (task) => {
     setTaskToEdit(task);
     setIsModalOpen(true);
+  };
+
+  const handleDeleteTask = () => {
+    const updatedTasks = tasks.filter(task => task.id !== taskToDelete.id);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    setConfirmationModalOpen(false);
+    toast.error('Tarefa excluída!');
   };
 
   return (
@@ -64,7 +70,10 @@ const TaskList = () => {
           <Grid item xs={12} sm={6} key={task.id}>
             <Task task={task} 
             onToggleComplete={handleToggleComplete} 
-            onDeleteTask={deleteTask} 
+            onDeleteTask={() => {
+              setTaskToDelete(task);
+              setConfirmationModalOpen(true);
+            }} 
             onEditTask={handleOpenModalForEdit} />
           </Grid>
         ))}
@@ -83,6 +92,12 @@ const TaskList = () => {
         onAddTask={handleAddTask}
         onEditTask={handleEditTask}
         taskToEdit={taskToEdit}
+      />
+      <ConfirmationModal
+        open={confirmationModalOpen}
+        onClose={() => setConfirmationModalOpen(false)}
+        onConfirm={handleDeleteTask}
+        taskName={taskToDelete ? taskToDelete.title : ''}
       />
     </div>
   );
