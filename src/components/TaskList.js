@@ -3,7 +3,7 @@ import { Button, Grid, Card, CardContent} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Task from './Task';
 import AddTaskModal from './AddTaskModal';
-
+import { toast } from 'react-toastify';
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,6 +27,7 @@ const TaskList = () => {
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    toast.success('Tarefa adicionada com sucesso!');
   };
 
   const handleEditTask = (updatedTask) => {
@@ -36,12 +37,14 @@ const TaskList = () => {
     setTasks(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     setTaskToEdit(null);
+    toast.success('Tarefa editada com sucesso!');
   };
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter(task => task.id !== taskId);
     setTasks(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    toast.error('Tarefa excluída!');
   };
 
   const handleOpenModalForEdit = (task) => {
