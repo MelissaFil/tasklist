@@ -72,34 +72,41 @@ const TaskList = () => {
 
   return (
     <div>
-      <ToggleButtonGroup
-        value={filter}
-        exclusive
-        onChange={(event, newFilter) => setFilter(newFilter)}
-        aria-label="Filtro de Tarefas"
-        style={{ marginBottom: '10px' }}
-      >
-        <ToggleButton value="all" aria-label="Todas as Tarefas">
-          Todas
-        </ToggleButton>
-        <ToggleButton value="completed" aria-label="Tarefas Concluídas">
-          Concluídas
-        </ToggleButton>
-        <ToggleButton value="uncompleted" aria-label="Tarefas Não Concluídas">
-          Não Concluídas
-        </ToggleButton>
-      </ToggleButtonGroup>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setIsModalOpen(true)}
-        style={{ marginBottom: '10px' }}
-      >
-        Adicionar tarefa
-      </Button>
+     
+      <Grid container justifyContent="space-between">
+        <Grid item>
+          <ToggleButtonGroup
+            value={filter}
+            exclusive
+            onChange={(event, newFilter) => setFilter(newFilter)}
+            aria-label="Filtro de Tarefas"
+            style={{ marginBottom: '10px' }}
+          >
+            <ToggleButton value="all" aria-label="Todas as Tarefas">
+              Todas
+            </ToggleButton>
+            <ToggleButton value="completed" aria-label="Tarefas Concluídas">
+              Concluídas
+            </ToggleButton>
+            <ToggleButton value="uncompleted" aria-label="Tarefas Não Concluídas">
+              Não Concluídas
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setIsModalOpen(true)}
+            style={{ marginBottom: '10px' }}
+          >
+            Adicionar tarefa
+          </Button>
+        </Grid>
+      </Grid>
       <Grid container spacing={2} marginTop={2}>
         {filteredTasks.map(task => (
-          <Grid item xs={12} sm={6} key={task.id}>
+          <Grid item xs={12} md={6} key={task.id}>
             <Task
               task={task}
               onToggleComplete={handleToggleComplete}
@@ -111,7 +118,7 @@ const TaskList = () => {
             />
           </Grid>
         ))}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} md={6}>
           <Card onClick={() => setIsModalOpen(true)} className='task-card-add'>
             <CardContent>
               <AddIcon fontSize="large" />
