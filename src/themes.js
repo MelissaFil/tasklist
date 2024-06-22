@@ -43,6 +43,9 @@ export const darkTheme = createTheme({
       },
       info:{
         main:'#5BC0DE'
+      },
+      danger:{
+        main:'#D9534F'
       }
   },
 });
