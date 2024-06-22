@@ -1,5 +1,4 @@
-.task-card, .task-card-add {
-    border-radius: 15px;
+.css-bhp9pd-MuiPaper-root-MuiCard-root.task-card, .task-card-add {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)!important;
     margin-bottom: 10px;
     padding: 10px;
@@ -11,8 +10,10 @@
   .task-content, .task-card-add {
     display: flex;
     flex-direction: column;
+    
   }
   
-  .task-card-add{
+  .css-bhp9pd-MuiPaper-root-MuiCard-root.task-card-add{
     align-items: center;
+    background-color: #CED4DA;
   }
