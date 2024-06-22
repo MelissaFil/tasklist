@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Grid, Card, CardContent} from '@mui/material';
+import { Button, Grid, Card, CardContent, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Task from './Task';
 import AddTaskModal from './AddTaskModal';
-import ConfirmationModal from './ConfirmationModal'; // Importar o modal de confirmação
+import ConfirmationModal from './ConfirmationModal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,6 +13,7 @@ const TaskList = () => {
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [taskToDelete, setTaskToDelete] = useState(null);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     // Carregar tarefas do local storage
@@ -58,28 +59,60 @@ const TaskList = () => {
     toast.error('Tarefa excluída!');
   };
 
+
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'completed') {
+      return task.completed;
+    } else if (filter === 'uncompleted') {
+      return !task.completed;
+    } else {
+      return true; 
+    }
+  });
+
   return (
     <div>
-      <Button variant="contained" 
-      color="primary" 
-      onClick={() => setIsModalOpen(true)}>
+      <ToggleButtonGroup
+        value={filter}
+        exclusive
+        onChange={(event, newFilter) => setFilter(newFilter)}
+        aria-label="Filtro de Tarefas"
+        style={{ marginBottom: '10px' }}
+      >
+        <ToggleButton value="all" aria-label="Todas as Tarefas">
+          Todas
+        </ToggleButton>
+        <ToggleButton value="completed" aria-label="Tarefas Concluídas">
+          Concluídas
+        </ToggleButton>
+        <ToggleButton value="uncompleted" aria-label="Tarefas Não Concluídas">
+          Não Concluídas
+        </ToggleButton>
+      </ToggleButtonGroup>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setIsModalOpen(true)}
+        style={{ marginBottom: '10px' }}
+      >
         Adicionar tarefa
       </Button>
       <Grid container spacing={2} marginTop={2}>
-        {tasks.map(task => (
+        {filteredTasks.map(task => (
           <Grid item xs={12} sm={6} key={task.id}>
-            <Task task={task} 
-            onToggleComplete={handleToggleComplete} 
-            onDeleteTask={() => {
-              setTaskToDelete(task);
-              setConfirmationModalOpen(true);
-            }} 
-            onEditTask={handleOpenModalForEdit} />
+            <Task
+              task={task}
+              onToggleComplete={handleToggleComplete}
+              onDeleteTask={() => {
+                setTaskToDelete(task);
+                setConfirmationModalOpen(true);
+              }}
+              onEditTask={handleOpenModalForEdit}
+            />
           </Grid>
         ))}
         <Grid item xs={12} sm={6}>
-          <Card onClick={() => setIsModalOpen(true)} 
-          className='task-card-add'>
+          <Card onClick={() => setIsModalOpen(true)} className='task-card-add'>
             <CardContent>
               <AddIcon fontSize="large" />
             </CardContent>
